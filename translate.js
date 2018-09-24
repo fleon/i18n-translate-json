@@ -163,21 +163,19 @@ var run = function(apiKey, dir, sourceLanguage, languages, finish) {
   };
   
   // read all files in directory
-	fs.readdir(dir, function(err, files) {
+  fs.readdir(dir, function(err, files) {
 
-		// could not read directory, bubble up error
-		if (err) return callback(err, null);
+    // could not read directory, bubble up error
+    if (err) return callback(err, null);
 
-		// filter out all other files then .js
-		files = files.filter(function(file) {
-			return file.indexOf(".json") > 0;
-		});
+    // filter out all other files then .js
+    files = files.filter(function(file) {
+      return file.indexOf(".json") > 0;
+    });
 
-		// process each file individually
-		async.map(files, processFile, finish);
-	});
-  // process the source file
-  processFile(sourceLanguage + '.json', finish);
+    // process each file individually
+    async.map(files, processFile, finish);
+  });
 };
 
 // EXPORTS
